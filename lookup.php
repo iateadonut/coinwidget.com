@@ -50,6 +50,9 @@ THE SOFTWARE.
 					case 'litecoin': 
 						$response = get_litecoin($address);
 						break;
+					case 'primecoin': 
+						$response = get_primecoin($address);
+						break;
 				}
 				$responses[$instance] = $response;
 			}
@@ -84,9 +87,26 @@ THE SOFTWARE.
 		}
 	}
 
-	function get_request($url,$timeout=4) {
+	function get_primecoin($address) {
+		$return = array();
+		$data = get_request('https://xpm.edenwired.com/?address='.$address.'&format=json', 4, 1);
+		if (!empty($data)) {
+			$data = json_decode($data);
+			$return += array(
+				'count' => (int) $data->n_tx,
+				'amount' => (float) $data->total_received
+			);
+		}
+		return $return;
+	}
+
+	function get_request($url,$timeout=4,$cert=0) {
 		if (function_exists('curl_version')) {
 			$curl = curl_init();
+			if ( 0 != $cert )
+			{
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+			}
 			curl_setopt($curl, CURLOPT_URL, $url);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
 			curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);

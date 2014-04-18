@@ -4,6 +4,8 @@ Donations welcome:
 	BTC: 122MeuyZpYz4GSHNrF98e6dnQCXZfHJeGS
 	LTC: LY1L6M6yG26b4sRkLv4BbkmHhPn8GR5fFm
 		~ Thank you!
+	For XPM fork:
+		XPM: APjSeBUGUEKj1n1kzvMT1N89DxMM2Ttvce
 
 ------------
 
@@ -37,7 +39,8 @@ var CoinWidgetComCounter = 0;
 
 if (typeof CoinWidgetCom != 'object')
 var CoinWidgetCom = {
-	source: 'http://coinwidget.com/widget/'
+	//source: 'http://coinwidget.com/widget/'
+	source: 'https://xpm.edenwired.com/widget/'
 	, config: []
 	, go :function(config) {
 		config = CoinWidgetCom.validate(config);
@@ -48,7 +51,7 @@ var CoinWidgetCom = {
 	}
 	, validate: function(config) {
 		var $accepted = [];
-		$accepted['currencies'] = ['bitcoin','litecoin'];
+		$accepted['currencies'] = ['bitcoin','litecoin','primecoin'];
 		$accepted['counters'] = ['count','amount','hide'];
 		$accepted['alignment'] = ['al','ac','ar','bl','bc','br'];
 		if (!config.currency || !CoinWidgetCom.in_array(config.currency,$accepted['currencies']))
@@ -197,7 +200,7 @@ var CoinWidgetCom = {
 			$html = ''
 				  + '<label>'+$config.lbl_address+'</label>'
 				  + '<input type="text" readonly '+$sel+'  value="'+$config.wallet_address+'" />'
-				  + '<a class="COINWIDGETCOM_CREDITS" href="http://coinwidget.com/" target="_blank">CoinWidget.com</a>'
+				  + '<a class="COINWIDGETCOM_CREDITS" href="https://xpm.edenwired.com/" target="_blank">xpm.edenwired.com</a>'
   				  + '<a class="COINWIDGETCOM_WALLETURI" href="'+$config.currency.toLowerCase()+':'+$config.wallet_address+'" target="_blank" title="Click here to send this address to your wallet (if your wallet is not compatible you will get an empty page, close the white screen and copy the address by hand)" ><img src="'+CoinWidgetCom.source+'icon_wallet.png" /></a>'
   				  + '<a class="COINWIDGETCOM_CLOSER" href="javascript:;" onclick="CoinWidgetCom.hide('+$instance+');" title="Close this window">x</a>'
   				  + '<img class="COINWIDGET_INPUT_ICON" src="'+CoinWidgetCom.source+'icon_'+$config.currency+'.png" width="16" height="16" title="This is a '+$config.currency+' wallet address." />'
